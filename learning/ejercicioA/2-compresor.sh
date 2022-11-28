@@ -2,17 +2,19 @@
 
 function empaquetarYcomprimir () {
 
-    tar --exclude='todo.sh' -cvzf "$(date +'%Y-%B-%d_%H-%M-%S').tar.gz" *.txt &> /dev/null
+    NOMBRE_TAR="$(date +'%Y-%B-%d_%H-%M-%S').tar.gz"
 
-    borrarComprimidos
+    tar  -cvzf "$NOMBRE_TAR" *.txt &> /dev/null
+
+    borrarComprimidos $NOMBRE_TAR
     return 0
 
 }
 
 function borrarComprimidos () {
-
-    NAMES=$(tar -tf $(date +'%Y-%B-%d_%H-%M-%S').tar.gz)
+    
+    NAMES=$(tar -tf $NOMBRE_TAR)
     rm $NAMES
- 
+
     return 0
 }
